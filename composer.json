@@ -1,0 +1,23 @@
+{
+    "name": "casa/php-news-portal",
+    "authors": [
+        {
+            "name": "Lucas Gabriel",
+            "email": "lucasgabrielsampaio2019@gmail.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/config.php"
+        ]
+    },
+    "require": {
+        "coffeecode/router": "^1.0"
+    }
+}
