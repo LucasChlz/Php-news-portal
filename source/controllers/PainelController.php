@@ -56,7 +56,7 @@ class PainelController
                 $this->painelModel->deleteCategory($id);
             }
 
-            $category = $this->painelModel->listCategory();
+            $category = $this->painelModel->listCategory(true,false);
 
             include("source/views/painel/category.php");
         }

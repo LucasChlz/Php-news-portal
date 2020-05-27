@@ -42,7 +42,7 @@
                 <tr>
                     <td><?= $value['name']; ?></td>
                     <td><?= $value['slug']; ?></td>
-                    <td>Edit</td>
+                    <td><a href="<?= URL_PAINEL; ?>/category/<?= $value['slug'] ?>">Edit</a></td>
                     <td><a href="<?= URL_PAINEL; ?>/category?delete=<?= $value['id'] ?>">Delete</a></td>
                 </tr>
                 <?php } ?>

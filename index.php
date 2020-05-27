@@ -18,5 +18,7 @@ $router->post("/", "PainelController:home");
 $router->get("/category", "PainelController:category");
 $router->post("/category", "PainelController:category");
 
+$router->get("/category/{slugCategory}", "PainelController:category");
+
 
 $router->dispatch();

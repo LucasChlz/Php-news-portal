@@ -46,20 +46,39 @@ class PainelModel
         {
             \Source\Util\Utility::alertJs("fill all fields");
         }else{
-
-            $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_category` VALUES (null,?,?) ");
-            if($sql->execute(array($name,$slug)))
+            
+            $verify = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category` WHERE name = ? AND slug = ?");
+            $verify->execute(array($name,$slug));
+            if($verify->rowCount() == 1)
             {
-                \Source\Util\Utility::alertJs("category successfully created");
+                \Source\Util\Utility::alertJs("this category already exists");
+
+            }else{
+
+                $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_category` VALUES (null,?,?) ");
+                if($sql->execute(array($name,$slug)))
+                {
+                    \Source\Util\Utility::alertJs("category successfully created");
+                }
             }
         }
+        
     }
     
-    public function listCategory()
+    public function listCategory($all,$fetch)
     {
-        $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category`");
-        $sql->execute();
-        return $sql->fetchAll();
+        if($all)
+        {
+            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category`");
+            $sql->execute();
+            return $sql->fetchAll();
+
+        }else if($fetch)
+        {
+            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category`");
+            $sql->execute();
+            return $sql->fetch();
+        }
     }
 
     public function deleteCategory($id)
