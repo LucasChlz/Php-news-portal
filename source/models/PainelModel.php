@@ -116,4 +116,28 @@ class PainelModel
         }
     }
 
+    public function createNews($title,$img,$content,$category_name)
+    {
+
+        if($title == "" || $img == "" || $content == "")
+        {
+            \Source\Util\Utility::alertJs("fill all fields");
+
+        }else{
+
+            if(\Source\Util\Utility::imgValidates($img) == false)
+            {
+                \Source\Util\Utility::alertJs("invalid image");
+            }else{
+                $imgF = \Source\Util\Utility::uploadImg($img);
+            }
+
+            $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?) ");
+            if($sql->execute(array($title,$imgF,$content,$category_name)))
+            {
+                \Source\Util\Utility::alertJs("post created successfully");
+            }
+        }
+    }
+
 }

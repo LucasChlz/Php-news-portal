@@ -16,8 +16,21 @@ class PainelController
     {
         if(isset($_SESSION['log_start']))
         {
+
+            $categorysAll = $this->painelModel->listCategory(true,false,"");
             
             if(isset($_GET['loggout'])){$this->painelModel->loggout();}
+
+            if(isset($_POST['register-news']))
+            {
+                $title = $_POST['title-news'];
+                $img = $_FILES['image'];
+                $content = $_POST['content-news'];
+                $category = $_POST['news'];
+
+                $this->painelModel->createNews($title,$img,$content,$category);
+            }
+
             include("source/views/painel/home.php");
 
         }else{

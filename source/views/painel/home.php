@@ -26,13 +26,15 @@
                 <label for="title-news">Title</label>
                     <input type="text" name="title-news">
                 <label for="file">Image news</label>
-                    <input type="file" name="file_news">
+                    <input type="file" name="image">
                 <label for="content">Content</label>
                     <textarea name="content-news"></textarea>
                 <label for="">Category</label>
-                  <select>
-                      <option value="">Sport</option>
-                  </select>
+                <select name="news">
+                    <?php foreach($categorysAll as $key => $value){ ?>
+                        <option name="category-name" value="<?= $value['name'] ?>"><?= $value['name'] ?></option>
+                    <?php } ?>
+                </select>
                 <input type="submit" name="register-news" value="register">
             </form>
         </div><!--container-->

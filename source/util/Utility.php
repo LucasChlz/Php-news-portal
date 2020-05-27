@@ -24,5 +24,28 @@ class Utility
         $str=strtolower($str);
         return $str;
     }
+    
+    public static function imgValidates($image){
+        if($image['type'] == 'image/jpeg' ||
+            $image['type'] == 'image/jpg' ||
+            $image['type'] == 'image/png')
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function uploadImg($image){
+        $imageType = explode('.',$image['name']);
+        $imageName = uniqid().'.'.$imageType[count($imageType) -1];
+        if(move_uploaded_file($image['tmp_name'],URL_DIR.'/views/Images/'.$imageName)){
+            return $imageName;
+        }else{
+            return false;
+        }
+    }
+
+
 }
 

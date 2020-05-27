@@ -19,7 +19,7 @@
 
     <section class="category-create">
         <div class="container">
-            <h2>Write your news</h2>
+            <h2>Write your categorys</h2>
             <form method="POST" enctype="multipart/form-data">
                 <label for="title-news">Name</label>
                     <input type="text" name="name">
