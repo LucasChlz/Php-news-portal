@@ -36,6 +36,7 @@ class PainelModel
         session_unset();
         session_destroy();
         header('Location: '.URL_INI);
+        die();
     }
 
 }

@@ -39,6 +39,7 @@ class PainelController
         if(!isset($_SESSION['logged']))
         {
             header('Location: '.URL_INI);
+            die();
 
         }else{
             include("source/views/painel/category.php");
