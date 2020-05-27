@@ -161,11 +161,7 @@ header {
 
 .category-create form {
   width: 80%;
-  position: absolute;
-  top: 20%;
-  left: 50%;
   width: 1100px;
-  transform: translate(-50%,-50%);
 }
 
 .category-create form input[type=text] {
@@ -188,4 +184,29 @@ header {
   transition: 0.5s;
   background: rgb(124, 124, 124);
   color: black;
+}
+
+.list-category {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.list-category table {
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.list-category td {
+  border-bottom: 1px solid #ccc;
+}
+
+.list-category td a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.list-category > .container h2 {
+  text-align: center;
+  margin-bottom: 10px;
 }

@@ -50,6 +50,13 @@ class PainelController
                 $this->painelModel->createCategory($name,$slug);
             }
 
+            if(isset($_GET['delete']))
+            {
+                $id = $_GET['delete'];
+                $this->painelModel->deleteCategory($id);
+            }
+
+            $category = $this->painelModel->listCategory();
 
             include("source/views/painel/category.php");
         }

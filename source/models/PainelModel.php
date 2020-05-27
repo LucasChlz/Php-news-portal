@@ -53,6 +53,19 @@ class PainelModel
                 \Source\Util\Utility::alertJs("category successfully created");
             }
         }
-    } 
+    }
+    
+    public function listCategory()
+    {
+        $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category`");
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+
+    public function deleteCategory($id)
+    {
+        $sql = \Source\Util\MySql::connect()->prepare("DELETE FROM `tb_category` WHERE id = ?");
+        $sql->execute(array($id));
+    }
 
 }

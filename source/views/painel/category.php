@@ -27,5 +27,27 @@
             </form>
         </div><!--container-->
     </section><!--post-news-->
+
+    <section class="list-category">
+        <div class="container">
+            <h2>created categories</h2>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Slug</td>
+                    <td>#</td>
+                    <td>#</td>
+                </tr>
+                <?php foreach($category as $key => $value){ ?>
+                <tr>
+                    <td><?= $value['name']; ?></td>
+                    <td><?= $value['slug']; ?></td>
+                    <td>Edit</td>
+                    <td><a href="<?= URL_PAINEL; ?>/category?delete=<?= $value['id'] ?>">Delete</a></td>
+                </tr>
+                <?php } ?>
+            </table>
+        </div><!--container-->
+    </section><!--list-category-->
 </body>
 </html>
