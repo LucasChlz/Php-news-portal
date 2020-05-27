@@ -39,4 +39,20 @@ class PainelModel
         die();
     }
 
+    public function createCategory($name,$slug)
+    {
+
+        if($name == "")
+        {
+            \Source\Util\Utility::alertJs("fill all fields");
+        }else{
+
+            $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_category` VALUES (null,?,?) ");
+            if($sql->execute(array($name,$slug)))
+            {
+                \Source\Util\Utility::alertJs("category successfully created");
+            }
+        }
+    } 
+
 }

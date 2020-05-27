@@ -36,12 +36,21 @@ class PainelController
 
     public function category($data)
     {
-        if(!isset($_SESSION['logged']))
+        if(!isset($_SESSION['log_start']))
         {
             header('Location: '.URL_INI);
             die();
 
         }else{
+
+            if(isset($_POST['register-news']))
+            {
+                $name = $data['name'];
+                $slug = \Source\Util\Utility::generateSlug($name);
+                $this->painelModel->createCategory($name,$slug);
+            }
+
+
             include("source/views/painel/category.php");
         }
     }
