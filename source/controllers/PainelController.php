@@ -33,4 +33,15 @@ class PainelController
             include("source/views/painel/login.php");
         }
     }
+
+    public function category($data)
+    {
+        if(!isset($_SESSION['logged']))
+        {
+            header('Location: '.URL_INI);
+
+        }else{
+            include("source/views/painel/category.php");
+        }
+    }
 }

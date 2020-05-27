@@ -144,3 +144,12 @@ header {
   text-decoration: none;
   float: right;
 }
+
+.category {
+  padding-top: 5px;
+  color: white;
+  font-size: 23px;
+  text-decoration: none;
+  float: right;
+  margin-right: 10px;
+}

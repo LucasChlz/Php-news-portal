@@ -13,7 +13,8 @@
     <header>
         <div class="container">
            <div class="logo"><a href="<?= URL_INI; ?>">publish your news | <?= $_SESSION['login'] ?></a></div>
-           <a class="loggout" href="<?= URL_PAINEL; ?>?loggout">Loggout</a>
+           <a class="loggout" href="<?= URL_PAINEL; ?>?loggout">Loggout |</a>
+           <a class="category" href="<?= URL_PAINEL; ?>/category">Category |</a>
         </div><!--container-->
         <div class="clear"></div>
     </header>
