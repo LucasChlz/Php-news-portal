@@ -16,6 +16,8 @@ class PainelController
     {
         if(isset($_SESSION['logged']))
         {
+            if(isset($_GET['loggout'])){$this->painelModel->loggout();}
+
             include("source/views/painel/home.php");
 
         }else{

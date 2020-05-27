@@ -15,7 +15,7 @@ class PainelModel
             $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_users` WHERE login = ? AND password = ?");
 
             $sql->execute(array($login,$password));
-            
+
             if($sql->rowCount() == 1)
             {
                 $info = $sql->fetch();
@@ -29,6 +29,13 @@ class PainelModel
                 die();
             }
         }
+    }
+
+    public function loggout()
+    {
+        session_unset();
+        session_destroy();
+        header('Location: '.URL_INI);
     }
 
 }

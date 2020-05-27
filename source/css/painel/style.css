@@ -5,6 +5,10 @@
   font-family: 'DM Mono', monospace;
 }
 
+.clear {
+  clear: both;
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -16,6 +20,11 @@ header {
   width: 100%;
   height: auto;
   padding: 10px 0;
+}
+
+.logo {
+  display: inline-block;
+  text-align: center;
 }
 
 .logo a {
@@ -126,4 +135,12 @@ header {
   transition: 0.5s;
   background: rgb(124, 124, 124);
   color: black;
+}
+
+.loggout {
+  padding-top: 5px;
+  color: white;
+  font-size: 23px;
+  text-decoration: none;
+  float: right;
 }
