@@ -18,7 +18,7 @@
     <h2>Login to your account</h2><br>
       <input type="text" name="login" placeholder="your login...">
       <input type="password" name="password" placeholder="your password">
-      <input type="submit" name="login" value="login">
+      <input type="submit" name="action" value="login">
   </form>
 </section>
 </body>
