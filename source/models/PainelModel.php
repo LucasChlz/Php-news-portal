@@ -65,7 +65,7 @@ class PainelModel
         
     }
     
-    public function listCategory($all,$fetch)
+    public function listCategory($all,$fetchOne,$slugCategory)
     {
         if($all)
         {
@@ -73,10 +73,10 @@ class PainelModel
             $sql->execute();
             return $sql->fetchAll();
 
-        }else if($fetch)
+        }else if($fetchOne)
         {
-            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category`");
-            $sql->execute();
+            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category` WHERE slug = ?");
+            $sql->execute(array($slugCategory));
             return $sql->fetch();
         }
     }

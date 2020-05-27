@@ -56,9 +56,25 @@ class PainelController
                 $this->painelModel->deleteCategory($id);
             }
 
-            $category = $this->painelModel->listCategory(true,false);
+            $category = $this->painelModel->listCategory(true,false,"");
 
             include("source/views/painel/category.php");
         }
     }
+
+    public function categorySingle($data)
+    {
+        if(!isset($_SESSION['log_start']))
+        {
+            header('Location: '.URL_INI);
+            die();
+        }else{
+
+            $slugCategory = $data['slugCategory'];
+
+            $categorySingle = $this->painelModel->listCategory(false,true,$slugCategory);
+            include("source/views/painel/categorySingle.php");
+        }
+    }
+
 }
