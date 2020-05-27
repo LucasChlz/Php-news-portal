@@ -14,10 +14,10 @@ class PainelController
 
     public function home($data)
     {
-        if(isset($_SESSION['logged']))
+        if(isset($_SESSION['log_start']))
         {
+            
             if(isset($_GET['loggout'])){$this->painelModel->loggout();}
-
             include("source/views/painel/home.php");
 
         }else{

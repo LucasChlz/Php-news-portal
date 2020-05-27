@@ -20,9 +20,9 @@ class PainelModel
             {
                 $info = $sql->fetch();
 
-                $_SESSION['logged'] = true;
+                $_SESSION['log_start'] = true;
                 $_SESSION['id_user'] = $info['id'];
-                $_SESSION['login'] = $info['login'];
+                $_SESSION['login_user'] = $info['login'];
                 $_SESSION['password'] = $info['password'];
 
                 header('Location: '.URL_PAINEL);
