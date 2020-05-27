@@ -2,15 +2,15 @@
 
 namespace Source\Controllers;
 
-class PortalController
+class PainelController
 {
     public function __construct()
     {
-
+      
     }
 
     public function home()
     {
-        include("source/views/home.php");
+        include("source/views/painel/home.php");
     }
 }

@@ -9,6 +9,9 @@ $router = new Router(URL_INI);
 $router->namespace("Source\Controllers");
 
 $router->group("/");
-$router->get("/", "PortalController:portalHome");
+$router->get("/", "PortalController:home");
+
+$router->group("/painel");
+$router->get("/", "PainelController:home");
 
 $router->dispatch();
