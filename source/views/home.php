@@ -11,6 +11,8 @@
     <header>
         <div class="container">
            <div class="logo"><a href="<?= URL_INI; ?>">News Portal</a></div>
+           <a class="login" href="<?= URL_PAINEL; ?>">Login</a>
+           <div class="clear"></div>
         </div><!--container-->
     </header>
 
