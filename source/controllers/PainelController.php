@@ -11,6 +11,11 @@ class PainelController
 
     public function home()
     {
-        include("source/views/painel/home.php");
+        if(isset($_SESSION['logged']))
+        {
+            include("source/views/painel/home.php");
+        }else{
+            include("source/views/painel/login.php");
+        }
     }
 }

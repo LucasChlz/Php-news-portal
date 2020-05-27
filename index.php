@@ -13,5 +13,6 @@ $router->get("/", "PortalController:home");
 
 $router->group("/painel");
 $router->get("/", "PainelController:home");
+$router->get("/category", "PainelController:category");
 
 $router->dispatch();
