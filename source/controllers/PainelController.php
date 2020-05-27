@@ -69,8 +69,16 @@ class PainelController
             header('Location: '.URL_INI);
             die();
         }else{
-
+            
             $slugCategory = $data['slugCategory'];
+
+            if(isset($_POST['edit-category']))
+            {
+                $name = $data['name'];
+                $newSlug = \Source\Util\Utility::generateSlug($name);
+
+                $this->painelModel->editCategory($name,$newSlug,$slugCategory);
+            }
 
             $categorySingle = $this->painelModel->listCategory(false,true,$slugCategory);
             include("source/views/painel/categorySingle.php");

@@ -87,4 +87,33 @@ class PainelModel
         $sql->execute(array($id));
     }
 
+    public function editCategory($name,$newSlug,$slugCategoria)
+    {
+
+        if($name == "" || $slugCategoria == "")
+        {
+            \Source\Util\Utility::alertJs("fill all fields");
+        }else
+        {
+            $verifyCategory = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category` WHERE slug = ?");
+
+            $verifyCategory->execute(array($slugCategoria));
+    
+            if($verifyCategory->rowCount() == 1)
+            {
+                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_category` SET `name` = ?,`slug` = ? WHERE slug = ?");
+
+                if($sql->execute(array($name,$newSlug,$slugCategoria)))
+                {
+                    header('Location: '.URL_PAINEL.'/category');
+                    die();   
+                }
+    
+            }else{
+    
+                \Source\Util\Utility::alertJs("this category does not exist");
+            }
+        }
+    }
+
 }
