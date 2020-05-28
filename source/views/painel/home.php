@@ -54,7 +54,7 @@
                 <tr>
                     <td><?= $value['title']; ?></td>
                     <td><?= $value['slug_news']; ?></td>
-                    <td><a href="<?= URL_PAINEL; ?>/news/<?= $value['slug_news'] ?>">Edit</a></td>
+                    <td><a href="<?= URL_PAINEL; ?>/news/edit/<?= $value['slug_news'] ?>">Edit</a></td>
                     <td><a href="<?= URL_PAINEL; ?>?delete=<?= $value['id'] ?>">Delete</a></td>
                 </tr>
                 <?php } ?>

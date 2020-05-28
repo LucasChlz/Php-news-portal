@@ -34,16 +34,16 @@
         <div class="container">
             <h2>News</h2>
             <div class="container-grid">
-              
+                <?php foreach($allNews as $key => $value){ ?>
                 <div class="news-grid">
                     <div class="img-news">
-                        <img src="" alt="">
+                        <img src="<?= URL_SOURCE; ?>/views/Images/<?= $value['img']; ?>" alt="">
                     </div><!--img-news-->
                     <div class="title-news">
-                        <a href=""><h1>Lorem ipsum title news portal</h1></a>
+                        <a href="<?= URL_INI; ?>/news/<?= $value['slug_news'] ?>"><h1><?= $value['title']; ?></h1></a>
                     </div><!--title--news-->
                 </div><!--news-grid-->
-
+                <?php } ?>
             </div><!--container--grid-->
         </div><!--container-->
     </section><!--news-->

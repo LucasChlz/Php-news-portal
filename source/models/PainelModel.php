@@ -147,7 +147,7 @@ class PainelModel
                 }else{
 
                     $imgF = \Source\Util\Utility::uploadImg($img);
-                    $date = date("Y-m-d");
+                    $date = date("Y-m-d");                    
 
                     $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?,?,?) ");
                     if($sql->execute(array($title,$imgF,$content,$category_name,$slug_news,$date)))
@@ -194,19 +194,36 @@ class PainelModel
                 $img = \Source\Util\Utility::uploadImg($img);
                 $date = date("Y-m-d");
 
-                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?, `date` = ?");
-                if($sql->execute(array($title,$img,$content,$category_name,$slug_news,$date)))
+                $verifyNews = $this->listNews("WHERE slug_news = ?",$slug_news);
+
+                if($verifyNews->rowCount() == 1)
                 {
-                    header('Location: '.URL_PAINEL.'/news/'.$slug_news);
+                    \Source\Util\Utility::alertJs("this post already exists");
+                }else{
+                    $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?, `date` = ?");
+                    if($sql->execute(array($title,$img,$content,$category_name,$slug_news,$date)))
+                    {
+                        header('Location: '.URL_PAINEL.'/news/edit/'.$slug_news);
+                        die();
+                    }
                 }
 
             }else{
                 $img = $currentImage;
+                $date = date("Y-m-d");
 
-                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?");
-                if($sql->execute(array($title,$img,$content,$category_name,$slug_news)))
+                $verifyNews = $this->listNews("WHERE slug_news = ?",$slug_news);
+
+                if($verifyNews->rowCount() == 1)
                 {
-                    header('Location: '.URL_PAINEL.'/news/'.$slug_news);
+                    \Source\Util\Utility::alertJs("this post already exists");
+                }else{
+                    $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?, `date` = ?");
+                    if($sql->execute(array($title,$img,$content,$category_name,$slug_news,$date)))
+                    {
+                        header('Location: '.URL_PAINEL.'/news/edit/'.$slug_news);
+                        die();
+                    }
                 }
             }
         }  
