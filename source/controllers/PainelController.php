@@ -17,7 +17,7 @@ class PainelController
         if(isset($_SESSION['log_start']))
         {            
 
-            $categorysAll = $this->painelModel->listCategory(true,false,"");
+            $categorysAll = $this->painelModel->listCategory(true,false,false,"");
             $news = $this->painelModel->listNews("","","");
             
             if(isset($_GET['loggout'])){$this->painelModel->loggout();}
@@ -82,7 +82,7 @@ class PainelController
                 $this->painelModel->delete("tb_category",$id);
             }
 
-            $category = $this->painelModel->listCategory(true,false,"");
+            $category = $this->painelModel->listCategory(true,false,false,"");
 
             include("source/views/painel/category.php");
         }
@@ -97,6 +97,12 @@ class PainelController
         }else{
             
             $slugCategory = $data['slugCategory'];
+            $currentCategory = $this->painelModel->listCategory(false,false,true,$slugCategory); 
+            
+            if($currentCategory->rowCount() == 0){
+                header('Location: '.URL_PAINEL.'/category');
+                die();
+            };
 
             if(isset($_POST['edit-category']))
             {
@@ -106,7 +112,7 @@ class PainelController
                 $this->painelModel->editCategory($name,$newSlug,$slugCategory);
             }
 
-            $categorySingle = $this->painelModel->listCategory(false,true,$slugCategory);
+            $categorySingle = $this->painelModel->listCategory(false,true,false,$slugCategory);
             include("source/views/painel/categorySingle.php");
         }
     }
@@ -120,7 +126,7 @@ class PainelController
         }else
         {
             $slugNews = $data['slugNews'];
-            $categorysAll = $this->painelModel->listCategory(true,false,"");
+            $categorysAll = $this->painelModel->listCategory(true,false,false,"");
             $newsSingle = $this->painelModel->listNews("WHERE slug_news = ?",$slugNews)->fetch();
 
             if(isset($_POST['edit-news']))

@@ -17,7 +17,7 @@ class PortalController
     public function home()
     {
         $allNews = $this->portalModel->listNewsHome(false,"","");
-        $allCategorys = $this->painelModel->listCategory(true,false,"");
+        $allCategorys = $this->painelModel->listCategory(true,false,false,"");
 
         if(isset($_POST['search_news']))
         {
