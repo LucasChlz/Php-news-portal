@@ -147,8 +147,10 @@ class PainelModel
                 }else{
 
                     $imgF = \Source\Util\Utility::uploadImg($img);
-                    $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?,?) ");
-                    if($sql->execute(array($title,$imgF,$content,$category_name,$slug_news)))
+                    $date = date("Y-m-d");
+
+                    $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?,?,?) ");
+                    if($sql->execute(array($title,$imgF,$content,$category_name,$slug_news,$date)))
                     {
                         header("Location: ".URL_PAINEL);
                         die();
@@ -190,9 +192,10 @@ class PainelModel
 
                 $this->deleteImg($newsId);
                 $img = \Source\Util\Utility::uploadImg($img);
+                $date = date("Y-m-d");
 
-                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?");
-                if($sql->execute(array($title,$img,$content,$category_name,$slug_news)))
+                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?, `date` = ?");
+                if($sql->execute(array($title,$img,$content,$category_name,$slug_news,$date)))
                 {
                     header('Location: '.URL_PAINEL.'/news/'.$slug_news);
                 }

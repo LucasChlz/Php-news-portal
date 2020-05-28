@@ -15,7 +15,7 @@ class PainelController
     public function home($data)
     {
         if(isset($_SESSION['log_start']))
-        {
+        {            
 
             $categorysAll = $this->painelModel->listCategory(true,false,"");
             $news = $this->painelModel->listNews("","","");
