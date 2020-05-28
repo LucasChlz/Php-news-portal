@@ -173,4 +173,41 @@ class PainelModel
         }
     }
 
+    public function editNews($title,$img,$content,$category_name,$slug_news,$newsId,$currentImage)
+    {
+        $verifyNews = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_news` WHERE id = ? ");
+        $verifyNews->execute(array($newsId));
+        if($verifyNews->rowCount() == 0)
+        {
+            \Source\Util\Utility::alertJs("this news does not exist");
+        }else{
+
+            if($title == "" || $content == "" || $category_name == "")
+            {
+                \Source\Util\Utility::alertJs("fill all fields");
+            }
+            if(\Source\Util\Utility::imgValidates($img)){
+
+                $this->deleteImg($newsId);
+                $img = \Source\Util\Utility::uploadImg($img);
+
+                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?");
+                if($sql->execute(array($title,$img,$content,$category_name,$slug_news)))
+                {
+                    header('Location: '.URL_PAINEL.'/news/'.$slug_news);
+                }
+
+            }else{
+                $img = $currentImage;
+
+                $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_news` SET `title` = ?, `img` = ?, `content` = ?, `category_name` = ?, `slug_news` = ?");
+                if($sql->execute(array($title,$img,$content,$category_name,$slug_news)))
+                {
+                    header('Location: '.URL_PAINEL.'/news/'.$slug_news);
+                }
+            }
+        }  
+    }
+
+
 }

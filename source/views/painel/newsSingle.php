@@ -12,9 +12,9 @@
 <body>
     <header>
         <div class="container">
-           <div class="logo"><a href="<?= URL_INI; ?>">publish your news | <?= $_SESSION['login_user'] ?></a></div>
+           <div class="logo"><a href="<?= URL_INI; ?>">edit your news: <?= $slugNews; ?> | <?= $_SESSION['login_user'] ?></a></div>
            <a class="loggout" href="<?= URL_PAINEL; ?>?loggout">Loggout |</a>
-           <a class="category" href="<?= URL_PAINEL; ?>/category">Category |</a>
+           <a class="category" href="<?= URL_PAINEL; ?>">Painel |</a>
         </div><!--container-->
         <div class="clear"></div>
     </header>
@@ -24,43 +24,21 @@
             <h2>Write your news</h2>
             <form method="POST" enctype="multipart/form-data">
                 <label for="title-news">Title</label>
-                    <input type="text" name="title-news">
+                    <input type="text" name="title-news" value="<?= $newsSingle['title']; ?>">
                 <label for="file">Image news</label>
                     <input type="file" name="image">
                 <label for="content">Content</label>
-                    <textarea name="content-news"></textarea>
+                    <textarea name="content-news"><?= $newsSingle['content']; ?></textarea>
                 <label for="">Category</label>
                 <select name="news">
                     <?php foreach($categorysAll as $key => $value){ ?>
                         <option name="category-name" value="<?= $value['name'] ?>"><?= $value['name'] ?></option>
                     <?php } ?>
                 </select>
-                <input type="submit" name="register-news" value="register">
+                <input type="hidden" name="currentImg" value="<?= $newsSingle['img']; ?>">
+                <input type="submit" name="edit-news" value="edit">
             </form>
         </div><!--container-->
     </section><!--post-news-->
-
-    <section class="list-category">
-        <div class="container">
-            <h2>created posts</h2>
-            <table>
-                <tr>
-                    <td>Title</td>
-                    <td>Slug</td>
-                    <td>#</td>
-                    <td>#</td>
-                </tr>
-                <?php foreach($news as $key => $value){ ?>
-                <tr>
-                    <td><?= $value['title']; ?></td>
-                    <td><?= $value['slug_news']; ?></td>
-                    <td><a href="<?= URL_PAINEL; ?>/news/<?= $value['slug_news'] ?>">Edit</a></td>
-                    <td><a href="<?= URL_PAINEL; ?>?delete=<?= $value['id'] ?>">Delete</a></td>
-                </tr>
-                <?php } ?>
-            </table>
-        </div><!--container-->
-    </section><!--list-category-->
-
 </body>
 </html>

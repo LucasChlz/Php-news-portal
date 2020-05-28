@@ -37,7 +37,7 @@ class PainelController
             {
                 $id = $_GET['delete'];
                 $this->painelModel->deleteImg($id);
-                
+
                 $this->painelModel->delete("tb_news",$id);
                               
                 header("Location: ".URL_PAINEL);
@@ -108,6 +108,35 @@ class PainelController
 
             $categorySingle = $this->painelModel->listCategory(false,true,$slugCategory);
             include("source/views/painel/categorySingle.php");
+        }
+    }
+
+    public function newsSingle($data)
+    {
+        if(!isset($_SESSION['log_start']))
+        {
+            header('Location: '.URL_INI);
+            die();
+        }else
+        {
+            $slugNews = $data['slugNews'];
+            $categorysAll = $this->painelModel->listCategory(true,false,"");
+            $newsSingle = $this->painelModel->listNews("WHERE slug_news = ?",$slugNews)->fetch();
+
+            if(isset($_POST['edit-news']))
+            {
+                $title = $_POST['title-news'];
+                $img = $_FILES['image'];
+                $content = $_POST['content-news'];
+                $category_name = $_POST['news'];
+                $currentImg = $_POST['currentImg'];
+                $slug_news = \Source\Util\Utility::generateSlug($title);
+                $newId = $newsSingle['id'];
+
+                $this->painelModel->editNews($title,$img,$content,$category_name,$slug_news,$newId,$currentImg);
+            }
+            
+            include("source/views/painel/newsSingle.php");
         }
     }
 
