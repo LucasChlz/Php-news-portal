@@ -81,10 +81,19 @@ class PainelModel
         }
     }
 
-    public function deleteCategory($id)
+    public function delete($tb,$id)
     {
-        $sql = \Source\Util\MySql::connect()->prepare("DELETE FROM `tb_category` WHERE id = ?");
+        $sql = \Source\Util\MySql::connect()->prepare("DELETE FROM `$tb` WHERE id = ?");
         $sql->execute(array($id));
+    }
+
+    public function deleteImg($id)
+    {
+        $del = $this->listNews("WHERE id = ?",$id);
+        $delinfo = $del->fetch();
+
+        return unlink(URL_DIR.'/views/Images/'.$delinfo['img']);
+
     }
 
     public function editCategory($name,$newSlug,$slugCategoria)
@@ -116,7 +125,7 @@ class PainelModel
         }
     }
 
-    public function createNews($title,$img,$content,$category_name)
+    public function createNews($title,$img,$content,$category_name,$slug_news)
     {
 
         if($title == "" || $img == "" || $content == "")
@@ -129,14 +138,38 @@ class PainelModel
             {
                 \Source\Util\Utility::alertJs("invalid image");
             }else{
-                $imgF = \Source\Util\Utility::uploadImg($img);
-            }
+                
+                $verifyNews = $this->listNews("WHERE slug_news = ?",$slug_news);
 
-            $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?) ");
-            if($sql->execute(array($title,$imgF,$content,$category_name)))
-            {
-                \Source\Util\Utility::alertJs("post created successfully");
+                if($verifyNews->rowCount() == 1)
+                {
+                    \Source\Util\Utility::alertJs("this post already exists");
+                }else{
+
+                    $imgF = \Source\Util\Utility::uploadImg($img);
+                    $sql = \Source\Util\MySql::connect()->prepare("INSERT INTO `tb_news` VALUES (null,?,?,?,?,?) ");
+                    if($sql->execute(array($title,$imgF,$content,$category_name,$slug_news)))
+                    {
+                        header("Location: ".URL_PAINEL);
+                        die();
+                    }
+                }
             }
+        }
+    }
+
+    public function listNews($query,$param1)
+    {
+        if($query == "")
+        {
+            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_news`");
+            $sql->execute();
+            
+            return $sql->fetchAll();
+        }else {
+            $sql = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_news` $query");
+            $sql->execute(array($param1));
+            return $sql;
         }
     }
 

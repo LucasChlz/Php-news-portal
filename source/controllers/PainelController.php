@@ -18,6 +18,7 @@ class PainelController
         {
 
             $categorysAll = $this->painelModel->listCategory(true,false,"");
+            $news = $this->painelModel->listNews("","","");
             
             if(isset($_GET['loggout'])){$this->painelModel->loggout();}
 
@@ -27,8 +28,20 @@ class PainelController
                 $img = $_FILES['image'];
                 $content = $_POST['content-news'];
                 $category = $_POST['news'];
+                $slug_news = \Source\Util\Utility::generateSlug($title);
 
-                $this->painelModel->createNews($title,$img,$content,$category);
+                $this->painelModel->createNews($title,$img,$content,$category,$slug_news);
+            }
+
+            if(isset($_GET['delete']))
+            {
+                $id = $_GET['delete'];
+                $this->painelModel->deleteImg($id);
+                
+                $this->painelModel->delete("tb_news",$id);
+                              
+                header("Location: ".URL_PAINEL);
+                die();
             }
 
             include("source/views/painel/home.php");
@@ -66,7 +79,7 @@ class PainelController
             if(isset($_GET['delete']))
             {
                 $id = $_GET['delete'];
-                $this->painelModel->deleteCategory($id);
+                $this->painelModel->delete("tb_category",$id);
             }
 
             $category = $this->painelModel->listCategory(true,false,"");

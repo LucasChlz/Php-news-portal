@@ -39,5 +39,28 @@
             </form>
         </div><!--container-->
     </section><!--post-news-->
+
+    <section class="list-category">
+        <div class="container">
+            <h2>created posts</h2>
+            <table>
+                <tr>
+                    <td>Title</td>
+                    <td>Slug</td>
+                    <td>#</td>
+                    <td>#</td>
+                </tr>
+                <?php foreach($news as $key => $value){ ?>
+                <tr>
+                    <td><?= $value['title']; ?></td>
+                    <td><?= $value['slug_news']; ?></td>
+                    <td><a href="<?= URL_PAINEL; ?>/post/<?= $value['slug'] ?>">Edit</a></td>
+                    <td><a href="<?= URL_PAINEL; ?>?delete=<?= $value['id'] ?>">Delete</a></td>
+                </tr>
+                <?php } ?>
+            </table>
+        </div><!--container-->
+    </section><!--list-category-->
+
 </body>
 </html>
