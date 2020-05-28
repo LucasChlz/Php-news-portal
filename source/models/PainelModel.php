@@ -108,24 +108,20 @@ class PainelModel
         {
             \Source\Util\Utility::alertJs("fill all fields");
         }else
-        {
-            $verifyCategory = \Source\Util\MySql::connect()->prepare("SELECT * FROM `tb_category` WHERE slug = ?");
-
-            $verifyCategory->execute(array($slugCategoria));
-    
+        {   
+            $verifyCategory = $this->listCategory(false,false,true,$slugCategoria);
             if($verifyCategory->rowCount() == 1)
             {
+                \Source\Util\Utility::alertJs("this category already exists");
+            }else
+            {
                 $sql = \Source\Util\MySql::connect()->prepare("UPDATE `tb_category` SET `name` = ?,`slug` = ? WHERE slug = ?");
-
+    
                 if($sql->execute(array($name,$newSlug,$slugCategoria)))
                 {
                     header('Location: '.URL_PAINEL.'/category');
                     die();   
                 }
-    
-            }else{
-    
-                \Source\Util\Utility::alertJs("this category does not exist");
             }
         }
     }
