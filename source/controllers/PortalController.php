@@ -6,15 +6,25 @@ class PortalController
 {
 
     public $painelModel;
+    public $portalModel;
 
     public function __construct()
     {
         $this->painelModel = new \Source\Models\PainelModel;
+        $this->portalModel = new \Source\Models\PortalModel;
     }
 
     public function home()
     {
-        $allNews = $this->painelModel->listNews("","");
+        $allNews = $this->portalModel->listNewsHome(false,"","");
+        $allCategorys = $this->painelModel->listCategory(true,false,"");
+
+        if(isset($_POST['search_news']))
+        {
+            $title_search = $_POST['title_search'];
+            $category_search = $_POST['news_search'];
+            $allNews = $this->portalModel->listNewsHome(true,$title_search,$category_search);
+        }
         include("source/views/home.php");
     }
 

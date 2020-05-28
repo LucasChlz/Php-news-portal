@@ -11,6 +11,7 @@ $router->namespace("Source\Controllers");
 $router->group("/");
 
 $router->get("/", "PortalController:home");
+$router->post("/", "PortalController:home");
 
 $router->get("/news/{slugNews}", "PortalController:news");
 $router->post("/news/{slugNews}", "PortalController:news");

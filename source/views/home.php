@@ -20,10 +20,12 @@
         <div class="container">
             <h2>look for a news</h2>
             <form method="POST">
-                <input type="text" name="search_bar" placeholder="what do you search ?">
-                <select name="news">
-                    <option value="">Sports</option>
-                    <option value="">Cars</option>
+                <input type="text" name="title_search" placeholder="what do you search ?">
+                <select name="news_search">
+                        <option value="all">All</option>
+                    <?php foreach($allCategorys as $key => $value){ ?>
+                        <option value="<?= $value['name'] ?>"><?= $value['name'] ?></option>
+                    <?php } ?>
                 </select>
                 <input type="submit" name="search_news" value="search">
             </form>
