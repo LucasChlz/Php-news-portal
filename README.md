@@ -2,7 +2,7 @@
 #### forum made in php language with mvc focused on my learning
 
 ## How to use
-#### to start using this forum, you need to make some changes
+#### to start using this portal news, you need to make some changes
 
 <ul>
   <li>first you need to go to the configuration file and change the constant values for your use it is also to install the route system used in the case <b>coffeecode/router</b></li><br/>
